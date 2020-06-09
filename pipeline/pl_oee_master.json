@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Execute oee FTP to DL-",
+				"name": "Execute oee FTP to DL",
 				"type": "ExecutePipeline",
 				"dependsOn": [],
 				"userProperties": [],
