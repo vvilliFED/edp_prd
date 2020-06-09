@@ -1,0 +1,71 @@
+{
+	"name": "stg_oee_production",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "sqldw_edp_dev_01",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "ds_dw/ds_dw_oee/stg"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "prod_dt",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "year_cd",
+				"type": "char"
+			},
+			{
+				"name": "month_cd",
+				"type": "char"
+			},
+			{
+				"name": "machine_cd",
+				"type": "varchar"
+			},
+			{
+				"name": "prod_order_cd",
+				"type": "char"
+			},
+			{
+				"name": "prod_good_kg_vl",
+				"type": "varchar"
+			},
+			{
+				"name": "prod_scrap_kg_vl",
+				"type": "varchar"
+			},
+			{
+				"name": "prod_activity_min_vl",
+				"type": "varchar"
+			},
+			{
+				"name": "down_time_min_vl",
+				"type": "varchar"
+			},
+			{
+				"name": "prod_grammage_vl",
+				"type": "varchar"
+			},
+			{
+				"name": "prod_size_vl",
+				"type": "varchar"
+			},
+			{
+				"name": "src_filename",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "stg_s",
+			"table": "oee_production"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

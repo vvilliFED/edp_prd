@@ -1,0 +1,51 @@
+{
+	"name": "ds_dl_oee_cnf_csv",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "dlsedpdev01",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"FileName": {
+				"type": "string"
+			},
+			"FilePath": {
+				"type": "string"
+			}
+		},
+		"folder": {
+			"name": "ds_dl/ds_dl_oee"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@dataset().FileName",
+					"type": "Expression"
+				},
+				"folderPath": {
+					"value": "@concat('enterprise/oee/',dataset().FilePath)",
+					"type": "Expression"
+				},
+				"fileSystem": "edp"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Anno",
+				"type": "String"
+			},
+			{
+				"name": "Mese",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

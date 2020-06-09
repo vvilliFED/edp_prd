@@ -1,0 +1,671 @@
+{
+	"name": "pl_dl_dw_oee",
+	"properties": {
+		"description": "copy files from DL to DW staging area",
+		"activities": [
+			{
+				"name": "copy_plant_master_data",
+				"description": "Plant_Master_Data",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"additionalColumns": [
+							{
+								"name": "FilePath",
+								"value": "$$FILEPATH"
+							}
+						],
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"wildcardFileName": "*",
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "SqlDWSink",
+						"preCopyScript": "truncate table [sqldw-edp-dev-01].stg_s.plant_organization",
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Codice Stabilimento",
+									"type": "String"
+								},
+								"sink": {
+									"name": "plant_cd",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Stabilimento",
+									"type": "String"
+								},
+								"sink": {
+									"name": "plant_ds",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Codice Reparto",
+									"type": "String"
+								},
+								"sink": {
+									"name": "unit_cd",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Reparto",
+									"type": "String"
+								},
+								"sink": {
+									"name": "unit_ds",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Codice Centro di Lavoro",
+									"type": "String"
+								},
+								"sink": {
+									"name": "machining_center_cd",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Centro di Lavoro",
+									"type": "String"
+								},
+								"sink": {
+									"name": "machining_center_ds",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Codice Gruppo Macchina",
+									"type": "String"
+								},
+								"sink": {
+									"name": "machine_group_cd",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Gruppo Macchina",
+									"type": "String"
+								},
+								"sink": {
+									"name": "machine_group_ds",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Codice Macchina",
+									"type": "String"
+								},
+								"sink": {
+									"name": "machine_cd",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Macchina",
+									"type": "String"
+								},
+								"sink": {
+									"name": "machine_ds",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "FilePath",
+									"type": "String"
+								},
+								"sink": {
+									"name": "src_filename",
+									"type": "String"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_dl_plant_master_data",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "stg_plant_organization",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "copy_bdg_machine_prod",
+				"description": "src: Production_Budget",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"additionalColumns": [
+							{
+								"name": "FilePath",
+								"value": "$$FILEPATH"
+							}
+						],
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"wildcardFileName": "*",
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "SqlDWSink",
+						"preCopyScript": "truncate table [sqldw-edp-dev-01].stg_s.bdg_machine_prod",
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Codice Macchina",
+									"type": "String"
+								},
+								"sink": {
+									"name": "machine_cd",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Data",
+									"type": "String"
+								},
+								"sink": {
+									"name": "budget_dt",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "Anno",
+									"type": "String"
+								},
+								"sink": {
+									"name": "year_cd",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Mese Numero",
+									"type": "String"
+								},
+								"sink": {
+									"name": "month_cd",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Minuti Budget Produzione",
+									"type": "String"
+								},
+								"sink": {
+									"name": "bdg_machine_prod_min_vl",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Kg Budget Produzione",
+									"type": "String"
+								},
+								"sink": {
+									"name": "bdg_machine_prod_kg_vl",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "FilePath",
+									"type": "String"
+								},
+								"sink": {
+									"name": "src_filename",
+									"type": "String"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_dl_oee_production_budget",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "stg_bdg_machine_prod",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "copy_oee_prod",
+				"description": "src: OEE_Data_Kode",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"additionalColumns": [
+							{
+								"name": "FilePath",
+								"value": "$$FILEPATH"
+							}
+						],
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"wildcardFileName": "*",
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "SqlDWSink",
+						"preCopyScript": "truncate table [sqldw-edp-dev-01].stg_s.oee_prod",
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "DataFLEX",
+									"type": "String"
+								},
+								"sink": {
+									"name": "flex_dt",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "ProduzioneBuona",
+									"type": "String"
+								},
+								"sink": {
+									"name": "prod_good_ton_vl",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Scarto",
+									"type": "String"
+								},
+								"sink": {
+									"name": "scrap_ton_vl",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ProduzioneTarget",
+									"type": "String"
+								},
+								"sink": {
+									"name": "target_prod_ton_vl",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "TempoProduzione",
+									"type": "String"
+								},
+								"sink": {
+									"name": "prod_time_min_vl",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "TempoFermo",
+									"type": "String"
+								},
+								"sink": {
+									"name": "down_time_min_vl",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "EfficienzaTempo",
+									"type": "String"
+								},
+								"sink": {
+									"name": "eff_time_vl",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "EfficienzaMateriale",
+									"type": "String"
+								},
+								"sink": {
+									"name": "eff_material_vl",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "EfficienzaVelocita",
+									"type": "String"
+								},
+								"sink": {
+									"name": "eff_speed_vl",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "OEE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "oee_vl",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CodiceStabilimento",
+									"type": "String"
+								},
+								"sink": {
+									"name": "plant_cd",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CodiceMacchina",
+									"type": "String"
+								},
+								"sink": {
+									"name": "machine_cd",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "FilePath",
+									"type": "String"
+								},
+								"sink": {
+									"name": "src_filename",
+									"type": "String"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_dl_oee_data_kode",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "stg_oee_prod",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "copy_oee_production",
+				"description": "src: Production_Data_Cognos",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"additionalColumns": [
+							{
+								"name": "FilePath",
+								"value": "$$FILEPATH"
+							}
+						],
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"wildcardFileName": "*",
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "SqlDWSink",
+						"preCopyScript": "truncate table [sqldw-edp-dev-01].stg_s.oee_production",
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Data",
+									"type": "String"
+								},
+								"sink": {
+									"name": "prod_dt",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "Anno",
+									"type": "String"
+								},
+								"sink": {
+									"name": "year_cd",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Mese Numero",
+									"type": "String"
+								},
+								"sink": {
+									"name": "month_cd",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Codice Macchina",
+									"type": "String"
+								},
+								"sink": {
+									"name": "machine_cd",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Ordine di Produzione",
+									"type": "String"
+								},
+								"sink": {
+									"name": "prod_order_cd",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Kg Buoni",
+									"type": "String"
+								},
+								"sink": {
+									"name": "prod_good_kg_vl",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Kg Scartati",
+									"type": "String"
+								},
+								"sink": {
+									"name": "prod_scrap_kg_vl",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Minuti di attività",
+									"type": "String"
+								},
+								"sink": {
+									"name": "prod_activity_min_vl",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Minuti di fermo",
+									"type": "String"
+								},
+								"sink": {
+									"name": "down_time_min_vl",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Grammatura",
+									"type": "String"
+								},
+								"sink": {
+									"name": "prod_grammage_vl",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Formato Continua",
+									"type": "String"
+								},
+								"sink": {
+									"name": "prod_size_vl",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "FilePath",
+									"type": "String"
+								},
+								"sink": {
+									"name": "src_filename",
+									"type": "String"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_dl_oee_production_dataset_cognos",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "stg_oee_production",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"folder": {
+			"name": "pl_dl_dw"
+		},
+		"annotations": []
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

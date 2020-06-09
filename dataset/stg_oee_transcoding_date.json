@@ -1,0 +1,25 @@
+{
+	"name": "stg_oee_transcoding_date",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "sqldw_edp_dev_01",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "ds_dw/ds_dw_oee/stg"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "calendar_date",
+				"type": "date"
+			}
+		],
+		"typeProperties": {
+			"schema": "stg_s",
+			"table": "transcoding_date"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

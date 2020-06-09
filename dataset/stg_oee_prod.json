@@ -1,0 +1,73 @@
+{
+	"name": "stg_oee_prod",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "sqldw_edp_dev_01",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "ds_dw/ds_dw_oee/stg"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "plant_cd",
+				"type": "varchar"
+			},
+			{
+				"name": "machine_cd",
+				"type": "varchar"
+			},
+			{
+				"name": "flex_dt",
+				"type": "date"
+			},
+			{
+				"name": "prod_good_ton_vl",
+				"type": "varchar"
+			},
+			{
+				"name": "scrap_ton_vl",
+				"type": "varchar"
+			},
+			{
+				"name": "target_prod_ton_vl",
+				"type": "varchar"
+			},
+			{
+				"name": "prod_time_min_vl",
+				"type": "varchar"
+			},
+			{
+				"name": "down_time_min_vl",
+				"type": "varchar"
+			},
+			{
+				"name": "eff_time_vl",
+				"type": "varchar"
+			},
+			{
+				"name": "eff_material_vl",
+				"type": "varchar"
+			},
+			{
+				"name": "eff_speed_vl",
+				"type": "varchar"
+			},
+			{
+				"name": "oee_vl",
+				"type": "varchar"
+			},
+			{
+				"name": "src_filename",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "stg_s",
+			"table": "oee_prod"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

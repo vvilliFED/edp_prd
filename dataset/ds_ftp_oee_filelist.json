@@ -1,0 +1,40 @@
+{
+	"name": "ds_ftp_oee_filelist",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ftp_fedrigoni_sharedFolder_01",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"FilePath": {
+				"type": "string"
+			}
+		},
+		"folder": {
+			"name": "ds_ftp_folder/ds_ftp_oee"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "FtpServerLocation",
+				"folderPath": {
+					"value": "@concat('OEE/',dataset().FilePath)",
+					"type": "Expression"
+				}
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,24 @@
+{
+	"name": "ftp_fedrigoni_sharedFolder_01",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "FtpServer",
+		"typeProperties": {
+			"host": "sftp.fedrigoni.com",
+			"port": 21,
+			"enableSsl": true,
+			"enableServerCertificateValidation": false,
+			"authenticationType": "Basic",
+			"userName": "transparency",
+			"password": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "kv_edp_dev_01",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "transparency"
+			}
+		}
+	}
+}

@@ -1,0 +1,74 @@
+{
+	"name": "tbft_health_safety",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "sqldw_edp_dev_01",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "ds_dw/ds_dw_oee/dwh"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "machine_cd",
+				"type": "varchar"
+			},
+			{
+				"name": "budget_dt",
+				"type": "date"
+			},
+			{
+				"name": "year_cd",
+				"type": "char"
+			},
+			{
+				"name": "month_cd",
+				"type": "char"
+			},
+			{
+				"name": "bdg_machine_prod_min_vl",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "bdg_machine_prod_kg_vl",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "created_dt",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "lastmodified_dt",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "load_id",
+				"type": "varchar"
+			},
+			{
+				"name": "load_tm",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			}
+		],
+		"typeProperties": {
+			"schema": "dwh",
+			"table": "tbft_health_safety"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,53 @@
+{
+	"name": "stg_bdg_machine_prod",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "sqldw_edp_dev_01",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "ds_dw/ds_dw_oee/stg"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "machine_cd",
+				"type": "varchar"
+			},
+			{
+				"name": "budget_dt",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "year_cd",
+				"type": "varchar"
+			},
+			{
+				"name": "month_cd",
+				"type": "varchar"
+			},
+			{
+				"name": "bdg_machine_prod_min_vl",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "bdg_machine_prod_kg_vl",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "src_filename",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "stg_s",
+			"table": "bdg_machine_prod"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

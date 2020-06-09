@@ -1,0 +1,42 @@
+{
+	"name": "pl_oee_master",
+	"properties": {
+		"activities": [
+			{
+				"name": "Execute oee FTP to DL",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "pl_ftp_dl_oee",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "Execute oee DL to DW staging - completion",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Execute oee FTP to DL",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "pl_dl_dw_oee",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"annotations": []
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

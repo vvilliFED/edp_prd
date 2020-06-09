@@ -1,0 +1,33 @@
+{
+	"name": "ds_dl_oee_transcoding_date",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "dlsedpdev01",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "ds_dl/ds_dl_oee"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "date_oee.csv",
+				"folderPath": "enterprise/oee/cnf/transcoding_date",
+				"fileSystem": "edp"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "calendar_date",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

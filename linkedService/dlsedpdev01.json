@@ -1,0 +1,11 @@
+{
+	"name": "dlsedpdev01",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobFS",
+		"typeProperties": {
+			"url": "https://dlsedpdev01.dfs.core.windows.net"
+		}
+	}
+}

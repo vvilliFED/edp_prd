@@ -1,0 +1,65 @@
+{
+	"name": "stg_plant_organization",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "sqldw_edp_dev_01",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "ds_dw/ds_dw_oee/stg"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "plant_cd",
+				"type": "varchar"
+			},
+			{
+				"name": "plant_ds",
+				"type": "varchar"
+			},
+			{
+				"name": "unit_cd",
+				"type": "varchar"
+			},
+			{
+				"name": "unit_ds",
+				"type": "varchar"
+			},
+			{
+				"name": "machining_center_cd",
+				"type": "varchar"
+			},
+			{
+				"name": "machining_center_ds",
+				"type": "varchar"
+			},
+			{
+				"name": "machine_group_cd",
+				"type": "varchar"
+			},
+			{
+				"name": "machine_group_ds",
+				"type": "varchar"
+			},
+			{
+				"name": "machine_cd",
+				"type": "varchar"
+			},
+			{
+				"name": "machine_ds",
+				"type": "varchar"
+			},
+			{
+				"name": "src_filename",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "stg_s",
+			"table": "plant_organization"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

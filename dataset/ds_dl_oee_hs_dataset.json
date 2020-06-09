@@ -1,0 +1,22 @@
+{
+	"name": "ds_dl_oee_hs_dataset",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "dlsedpdev01",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "ds_dl/ds_dl_oee"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "enterprise/oee/hs_dataset",
+				"fileSystem": "edp"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

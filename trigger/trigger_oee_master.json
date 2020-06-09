@@ -1,0 +1,24 @@
+{
+	"name": "trigger_oee_master",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "pl_oee_master",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Day",
+				"interval": 1,
+				"startTime": "2020-05-04T07:30:00Z",
+				"timeZone": "UTC"
+			}
+		}
+	}
+}
